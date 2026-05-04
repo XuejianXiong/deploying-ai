@@ -20,6 +20,11 @@ if not os.environ.get("OPENAI_API_KEY"):
 agent=get_exercise_chat_agent()
  
 def exercise_chat(message: str, history: list[dict]) -> str:
+
+    # Keep the last 20 messages
+    MAX_HISTORY = 20
+    history = history[-MAX_HISTORY:]
+
     langchain_messages = []
     n = 0
     print(f"History: {history}")
