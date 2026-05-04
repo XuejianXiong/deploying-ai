@@ -20,11 +20,17 @@ This service is implemented through the ```get_mental_activity()``` tool in ```t
 
 It uses a Retrieval-Augmented Generation (RAG) approach with a persistent ChromaDB vector database. The database is built from curated mental exercise content using OpenAI embeddings.
 
+The embeddings for this service are precomputed and stored in a persistent ChromaDB database.
+
+- The source data comes from a CSV file ```data/mental.csv``` containing mental exercises.
+- Each row in the CSV is treated as a separate document, so no additional chunking is required.
+- Embeddings are generated using OpenAI’s text-embedding-3-small model via LangChain.
+- The vector database is created using the script ```main_vector_db.py```.
+- The resulting embeddings are stored locally in ```./chroma_db``` and reused during runtime, so the embedding process does not need to be repeated.
+
 The tool performs semantic search to return:
 - Cognitive exercises
 - Brain training activities
-
-The vector store is created by ```main_vector_db.py``` for scalable indexing.
 
 ### Service 3: Real-time Health Insights (Tavily AI Search)
 
